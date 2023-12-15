@@ -1,1 +1,49 @@
 
+<?php
+    session_start();
+    include("db.php");
+    if(isset($_POST['search'])){
+        $search_term = $_POST['search_term'];
+        $query = "SELECT * FROM form WHERE id='$search_term' OR fname='$search_term' OR lname='$search_term' OR email='$search_term'";
+        $query_run = mysqli_query($con, $query);
+        
+        if($query_run) {
+            while($row = mysqli_fetch_array($query_run)){
+?>
+                <form action="" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $row['id']?>"/></br>
+                    <input type="text" name="fname" value="<?php echo $row['fname']?>"/></br>
+                    <input type="text" name="lname" value="<?php echo $row['lname']?>"/></br>
+                    <input type="text" name="gender" value="<?php echo $row['gender']?>" /></br>
+                    <input type="text" name="cnum" value="<?php echo $row['cnum']?>" /></br>
+                    <input type="text" name="address"  value="<?php echo $row['address']?>"/></br>
+                    <input type="text" name="email" value="<?php echo $row['email']?>"/></br>
+                    <input type="text" name="password" value="<?php echo $row['password']?>"/>
+                </form>
+<?php
+            }
+        } else {
+            echo "No results found";
+        }
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search the data</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <center>
+        <div class="search">
+            <form action="" method="POST">
+                <input type="text" name="search_term" placeholder="Enter ID, First Name, Last Name, or Email"><br>
+                <input type="submit" name="search" value="Search Data">
+            </form>
+        </div>
+    </center>
+</body>
+</html>
