@@ -1,4 +1,5 @@
 <?php
+    // session_start();
     include('db.php');
 ?>
 <!DOCTYPE html>
@@ -7,11 +8,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body>
-    <h1>WELCOME USER</h1>
-    <a href="login.png">Logout</a>
-    <h2>welciomjbe eje fe </h2>
-    
+    <div class="hero">
+        <div class="card">
+            <h1>Profile Pic </h1>
+            <p>Not have an account? <a href="login.php">Logout Here!</a></p>
+            <img src="images/bannu.jpeg" id="profile-pic">
+            <label for ="input-file">Update image</label>
+            <input type="file" accept="image/jpeg, image/png,image/jpg" id="input-file">
+        </div>
+    </div>
+    <script>
+        let profilePic = document.getElementById("profile-pic");
+        let inputFile = document.getElementById("input-file");
+
+        inputFile.onchange =   function(){
+            profilePic.src= URL.createObjectURL(inputFile.files[0]);
+        }
+    </script>
 </body>
 </html>
